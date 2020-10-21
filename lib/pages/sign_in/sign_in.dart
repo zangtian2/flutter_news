@@ -1,8 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:news/common/api/news.dart';
-import 'package:news/common/api/user.dart';
+import 'package:news/common/api/apis.dart';
 import 'package:news/common/entity/entitys.dart';
-import 'package:news/common/entity/user.dart';
+import 'package:news/common/router/router.gr.dart';
 import 'package:news/common/utils/utils.dart';
 import 'package:news/common/values/values.dart';
 import 'package:news/common/widgets/widgets.dart';
@@ -31,8 +31,6 @@ class _SignInPageState extends State<SignInPage> {
 
   //执行登陆操作
   _handleSignIn() async {
-    List<CategoryResponseEntity> res = await NewsAPI.categories();
-    print(res);
     // if (!duIsEmail(_emailController.value.text)) {
     //   toastInfo(msg: "请输入正确邮件");
     //   return;
@@ -42,16 +40,19 @@ class _SignInPageState extends State<SignInPage> {
     //   return;
     // }
 
-    // UserLoginRequestEntity params = UserLoginRequestEntity(
-    //   email: _emailController.value.text,
-    //   password: duSHA256(_passController.value.text),
-    // );
+    UserLoginRequestEntity params = UserLoginRequestEntity(
+      email: _emailController.value.text,
+      password: duSHA256(_passController.value.text),
+    );
 
-    // UserLoginResponseEntity userProfile = await UserAPI.login(params: params);
-    // 写本地 access_token , 不写全局，业务：离线登录
-    // 全局数据 gUser
-    // Global.saveProfile(userProfile);
-    // print(userProfile);
+    UserLoginResponseEntity userProfile = await UserAPI.login(
+      context: context,
+      params: params,
+    );
+    Global.saveProfile(userProfile);
+
+    ExtendedNavigator.root
+        .pushAndRemoveUntil(Routes.applicationPage, (route) => false);
   }
 
   ////////////////////////////////////////////////////////

@@ -4,10 +4,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 /// 本地存储
 /// 单例 StorageUtil().getItem('key')
+/// 本地存储
 class StorageUtil {
   static StorageUtil _instance = new StorageUtil._();
   factory StorageUtil() => _instance;
   static SharedPreferences _prefs;
+
   StorageUtil._();
 
   static Future<void> init() async {
@@ -16,7 +18,7 @@ class StorageUtil {
     }
   }
 
-  Future<bool> setJson(String key, dynamic jsonVal) {
+  Future<bool> setJSON(String key, dynamic jsonVal) {
     String jsonString = jsonEncode(jsonVal);
     return _prefs.setString(key, jsonString);
   }

@@ -15,10 +15,10 @@ class NewsAPI {
   }) async {
     var response = await HttpUtil().get(
       '/news',
-      // context: context,
+      context: context,
       params: params?.toJson(),
       refresh: refresh,
-      // cacheDisk: cacheDisk,
+      cacheDisk: cacheDisk,
       cacheKey: STORAGE_INDEX_NEWS_CACHE_KEY,
     );
     return NewsPageListResponseEntity.fromJson(response);
@@ -33,23 +33,23 @@ class NewsAPI {
   }) async {
     var response = await HttpUtil().get(
       '/news/recommend',
-      // context: context,
+      context: context,
       params: params?.toJson(),
       refresh: refresh,
-      // cacheDisk: cacheDisk,
+      cacheDisk: cacheDisk,
     );
     return NewsItem.fromJson(response);
   }
 
   /// 分类
   static Future<List<CategoryResponseEntity>> categories({
-    // @required BuildContext context,
+    @required BuildContext context,
     bool cacheDisk = false,
   }) async {
     var response = await HttpUtil().get(
       '/categories',
-      // context: context,
-      // cacheDisk: cacheDisk,
+      context: context,
+      cacheDisk: cacheDisk,
     );
     return response
         .map<CategoryResponseEntity>(
@@ -64,8 +64,8 @@ class NewsAPI {
   }) async {
     var response = await HttpUtil().get(
       '/channels',
-      // context: context,
-      // cacheDisk: cacheDisk,
+      context: context,
+      cacheDisk: cacheDisk,
     );
     return response
         .map<ChannelResponseEntity>(
@@ -81,9 +81,9 @@ class NewsAPI {
   }) async {
     var response = await HttpUtil().get(
       '/tags',
-      // context: context,
+      context: context,
       params: params?.toJson(),
-      // cacheDisk: cacheDisk,
+      cacheDisk: cacheDisk,
     );
     return response
         .map<TagResponseEntity>((item) => TagResponseEntity.fromJson(item))

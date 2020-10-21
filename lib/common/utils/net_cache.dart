@@ -15,7 +15,7 @@ class CacheObject {
   }
 
   @override
-  int get haseCode => response.realUri.hashCode;
+  int get hashCode => response.realUri.hashCode;
 }
 
 class NetCache extends Interceptor {

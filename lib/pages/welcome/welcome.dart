@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:news/common/router/router.gr.dart';
 import 'package:news/common/utils/utils.dart';
 import 'package:news/common/values/values.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,7 +16,7 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context,
-        width: 375, height: 812 - 44 - 34, allowFontScaling: true);
+        designSize: Size(375, 734), allowFontScaling: true);
     return Scaffold(
       body: Center(
         child: Column(
@@ -131,8 +133,7 @@ class _WelcomePageState extends State<WelcomePage> {
           borderRadius: Radii.k6pxRadius,
         ),
         onPressed: () {
-          Navigator.pushNamed(context, "/sign-in");
-          // ExtendedNavigator.rootNavigator.pushNamed(Routes.signInPageRoute);
+          ExtendedNavigator.root.push(Routes.signInPage);
         },
       ),
     );
